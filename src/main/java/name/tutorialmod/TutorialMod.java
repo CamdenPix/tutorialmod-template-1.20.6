@@ -1,5 +1,7 @@
 package name.tutorialmod;
 
+import name.tutorialmod.block.ModBlocks;
+import name.tutorialmod.item.ModItemGroups;
 import name.tutorialmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -12,8 +14,8 @@ public class TutorialMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
-		LOGGER.info("Hello Fabric world!");
+		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 	}
 }
