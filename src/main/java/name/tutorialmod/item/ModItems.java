@@ -1,6 +1,7 @@
 package name.tutorialmod.item;
 
 import name.tutorialmod.TutorialMod;
+import name.tutorialmod.item.custom.MetalDetectorItem;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -17,11 +18,14 @@ public class ModItems {
     //and a new json file in the models/item to point to a texture to use in the textures/item folder
     public static final Item RUBY = registerItem("ruby", new Item(new Item.Settings()));
     public static final Item RAW_RUBY = registerItem("raw_ruby", new Item(new Item.Settings()));
+    public static final Item METAL_DETECTOR = registerItem("metal_detector",
+            new MetalDetectorItem(new Item.Settings().maxDamage(64)));
 
     //Helper function to add an item to an ingredient tab
     private static void addItemsToIngredientTab(FabricItemGroupEntries entries){
         entries.add(RUBY);
         entries.add(RAW_RUBY);
+        entries.add(METAL_DETECTOR);
         //add entries here to add more items
     }
 

@@ -20,6 +20,7 @@ public class ModItemGroups {
                         entries.add(ModItems.RUBY);
                         entries.add(ModBlocks.RUBY_BLOCK);
                         entries.add(ModBlocks.RAW_RUBY_BLOCK);
+                        entries.add(ModItems.METAL_DETECTOR);
                     }).build());
 
     public static void registerItemGroups() {
