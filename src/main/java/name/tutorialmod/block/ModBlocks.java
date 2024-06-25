@@ -1,6 +1,7 @@
 package name.tutorialmod.block;
 
 import name.tutorialmod.TutorialMod;
+import name.tutorialmod.block.custom.JumpBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -19,6 +20,8 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
     public static final Block RAW_RUBY_BLOCK = registerBlock("raw_ruby_block",
             new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), AbstractBlock.Settings.copy(Blocks.IRON_ORE).sounds(BlockSoundGroup.AMETHYST_CLUSTER)));
+    public static final Block JUMP_BLOCK = registerBlock("jump_block",
+            new JumpBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).jumpVelocityMultiplier(3f)));
 
     private static Block registerBlock(String name, Block block){
         registerBlockItem(name, block);

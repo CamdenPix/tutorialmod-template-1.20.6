@@ -2,10 +2,23 @@
 
   "item.tutorialmod.ruby": "Ruby",
   "item.tutorialmod.raw_ruby": "Raw Ruby",
+  "item.tutorialmod.dubious_stew": "Dubious Stew",
   "item.tutorialmod.metal_detector": "Metal Detector",
+  "item.tutorialmod.coal2": "COAL2.mov",
+  "item.tutorialmod.shido_helmet": "Shido",
+  "item.tutorialmod.shido_chestplate": "Shido",
+  "item.tutorialmod.shido_leggings": "Shido",
+  "item.tutorialmod.shido_boots": "Shido",
 
   "block.tutorialmod.ruby_block": "Block of Ruby",
   "block.tutorialmod.raw_ruby_block": "Ruby Ore",
+  "block.tutorialmod.jump_block": "Jump Booster",
+
+  "tooltip.tutorialmod.metal_detector.tooltip": "Ping... Pong",
+  "tooltip.tutorialmod.jump_block.tooltip": "Bouncey",
+
+  "key.tutorialmod.test": "Keybind Test Key",
+  "category.tutorialmod.keybinds": "Tutorial Mod",
 
   "itemgroup.ruby": "Ruby Tutorial Group"
 }

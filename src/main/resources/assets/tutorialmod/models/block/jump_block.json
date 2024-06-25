@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "tutorialmod:block/jump_block_bottom",
+    "particle": "tutorialmod:block/jump_block_side",
+    "side": "tutorialmod:block/jump_block_side",
+    "top": "tutorialmod:block/jump_block_top"
+  }
+}

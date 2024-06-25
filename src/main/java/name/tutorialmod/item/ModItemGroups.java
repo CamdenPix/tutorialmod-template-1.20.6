@@ -18,9 +18,16 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(ModItems.RUBY)).entries((displayContext, entries) -> {
                         entries.add(ModItems.RAW_RUBY);
                         entries.add(ModItems.RUBY);
+                        entries.add(ModItems.DUBIOUS_STEW);
+                        entries.add(ModItems.COAL2);
                         entries.add(ModBlocks.RUBY_BLOCK);
                         entries.add(ModBlocks.RAW_RUBY_BLOCK);
                         entries.add(ModItems.METAL_DETECTOR);
+                        entries.add(ModBlocks.JUMP_BLOCK);
+                        entries.add(ModItems.SHIDO_HELMET);
+                        entries.add(ModItems.SHIDO_CHESTPLATE);
+                        entries.add(ModItems.SHIDO_LEGGINGS);
+                        entries.add(ModItems.SHIDO_BOOTS);
                     }).build());
 
     public static void registerItemGroups() {
