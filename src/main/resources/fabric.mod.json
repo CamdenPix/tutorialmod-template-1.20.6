@@ -3,7 +3,7 @@
 	"id": "tutorialmod",
 	"version": "${version}",
 	"name": "TutorialMod",
-	"description": "Made following Kaupenjoe's 1.20 tutorial",
+	"description": "Made following Kaupenjoe's 1.20 tutorial, until I went off script and decided to look at mixins",
 	"authors": [
 		"Me!"
 	],
@@ -23,6 +23,9 @@
 		],
 		"fabric-datagen": [
 			"name.tutorialmod.TutorialModDataGenerator"
+		],
+		"cardinal-components": [
+			"name.tutorialmod.TutorialModComponent"
 		]
 	},
 	"mixins": [
@@ -37,5 +40,10 @@
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"tutorialmod:cad"
+		]
 	}
 }

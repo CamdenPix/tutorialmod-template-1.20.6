@@ -3,7 +3,7 @@
 	"package": "name.tutorialmod.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ModEntityCADMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
