@@ -2,6 +2,7 @@ package name.tutorialmod.components;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
@@ -15,6 +16,8 @@ public class CADComponent implements Component, AutoSyncedComponent {
     ItemStack chestplate;
     ItemStack leggings;
     ItemStack boots;
+    boolean armorEquipped;
+    boolean hasCAD;
 
     private static final ComponentKey<CADComponent> KEY = ComponentRegistry.getOrCreate(new Identifier("tutorialmod", "cad"), CADComponent.class);
 
@@ -23,6 +26,8 @@ public class CADComponent implements Component, AutoSyncedComponent {
         this.chestplate = ItemStack.EMPTY;
         this.leggings = ItemStack.EMPTY;
         this.boots = ItemStack.EMPTY;
+        armorEquipped = false;
+        hasCAD = false;
     }
 
     public CADComponent(ItemStack helmet, ItemStack chestplate, ItemStack leggings, ItemStack boots) {
@@ -30,6 +35,8 @@ public class CADComponent implements Component, AutoSyncedComponent {
         this.chestplate = chestplate;
         this.leggings = leggings;
         this.boots = boots;
+        armorEquipped = false;
+        hasCAD = true;
     }
 
     public void setArmor(ItemStack helmet, ItemStack chestplate, ItemStack leggings, ItemStack boots) {
@@ -37,22 +44,33 @@ public class CADComponent implements Component, AutoSyncedComponent {
         this.chestplate = chestplate;
         this.leggings = leggings;
         this.boots = boots;
+        armorEquipped = false;
+        hasCAD = true;
     }
 
-    public ItemStack getHelmet() {
-        return helmet;
+    public void clearArmor() {
+        this.helmet = ItemStack.EMPTY;
+        this.chestplate = ItemStack.EMPTY;
+        this.leggings = ItemStack.EMPTY;
+        this.boots = ItemStack.EMPTY;
+        armorEquipped = false;
+        hasCAD = false;
     }
 
-    public ItemStack getChestplate() {
-        return chestplate;
+    public void setHasCAD(Boolean haveCad){
+        this.hasCAD = haveCad;
     }
 
-    public ItemStack getLeggings() {
-        return leggings;
+    public boolean returnHasCAD(){
+        return hasCAD;
     }
 
-    public ItemStack getBoots() {
-        return boots;
+    public boolean getArmorEquipped(){
+        return armorEquipped;
+    }
+
+    public void swapArmorEquipped(){
+        armorEquipped = !armorEquipped;
     }
 
     public ItemStack swapHelmet(ItemStack helmet) {
@@ -82,35 +100,53 @@ public class CADComponent implements Component, AutoSyncedComponent {
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         NbtList list = tag.getList(KEY.toString(), 10);
-        boots = ItemStack.fromNbt(registryLookup, list.getCompound(0)).orElse(ItemStack.EMPTY);
-        leggings = ItemStack.fromNbt(registryLookup, list.getCompound(1)).orElse(ItemStack.EMPTY);
-        chestplate = ItemStack.fromNbt(registryLookup, list.getCompound(2)).orElse(ItemStack.EMPTY);
-        helmet = ItemStack.fromNbt(registryLookup, list.getCompound(3)).orElse(ItemStack.EMPTY);
+        for (NbtElement element : list) {
+            if(element instanceof NbtCompound) {
+                NbtCompound compound = (NbtCompound) element;
+                byte type = compound.getByte("Type");
+                switch (type) {
+                    case 1:
+                        boots = ItemStack.fromNbtOrEmpty(registryLookup, compound.getCompound("boots"));
+                        leggings = ItemStack.fromNbtOrEmpty(registryLookup, compound.getCompound("leggings"));
+                        chestplate = ItemStack.fromNbtOrEmpty(registryLookup, compound.getCompound("chestplate"));
+                        helmet = ItemStack.fromNbtOrEmpty(registryLookup, compound.getCompound("helmet"));
+                        break;
+                    case 2:
+                        armorEquipped = compound.getBoolean("armorequipped");
+                        hasCAD = compound.getBoolean("hascad");
+                        break;
+                }
+
+            }
+        }
     }
 
     @Override
     public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         NbtList nbtList = new NbtList();
-        NbtCompound nbtCompound = new NbtCompound();
+
+        NbtCompound armorNBTCompound = new NbtCompound();
+        armorNBTCompound.putByte("Type", (byte) 1);//Conveys armor info is contained
         if(boots != ItemStack.EMPTY) {
-            nbtCompound.putByte("Slot", (byte) 0);
-            nbtList.add(boots.encode(registryLookup, nbtCompound));
+            armorNBTCompound.put("boots", boots.encode(registryLookup));
         }
-
         if(leggings != ItemStack.EMPTY) {
-            nbtCompound.putByte("Slot", (byte) 1);
-            nbtList.add(leggings.encode(registryLookup, nbtCompound));
+            armorNBTCompound.put("leggings", leggings.encode(registryLookup));
         }
-
         if(chestplate != ItemStack.EMPTY) {
-            nbtCompound.putByte("Slot", (byte) 2);
-            nbtList.add(chestplate.encode(registryLookup, nbtCompound));
+            armorNBTCompound.put("chestplate", chestplate.encode(registryLookup));
         }
-
         if(helmet != ItemStack.EMPTY) {
-            nbtCompound.putByte("Slot", (byte) 3);
-            nbtList.add(helmet.encode(registryLookup, nbtCompound));
+            armorNBTCompound.put("helmet", helmet.encode(registryLookup));
         }
+        nbtList.add(armorNBTCompound);
+
+        NbtCompound boolsNBTCompound = new NbtCompound();
+        boolsNBTCompound.putByte("Type", (byte) 2); //Contains the bools
+        boolsNBTCompound.putBoolean("armorequipped", armorEquipped);
+        boolsNBTCompound.putBoolean("hascad", hasCAD);
+        nbtList.add(boolsNBTCompound);
+
         tag.put(KEY.toString(), nbtList);
     }
 }

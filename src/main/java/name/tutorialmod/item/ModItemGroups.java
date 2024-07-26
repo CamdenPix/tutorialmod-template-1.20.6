@@ -28,6 +28,15 @@ public class ModItemGroups {
                         entries.add(ModItems.SHIDO_CHESTPLATE);
                         entries.add(ModItems.SHIDO_LEGGINGS);
                         entries.add(ModItems.SHIDO_BOOTS);
+                        entries.add(ModItems.HONORIS_HELMET);
+                        entries.add(ModItems.HONORIS_CHESTPLATE);
+                        entries.add(ModItems.HONORIS_LEGGINGS);
+                        entries.add(ModItems.HONORIS_BOOTS);
+                        entries.add(ModItems.MERLIN_HELMET);
+                        entries.add(ModItems.MERLIN_CHESTPLATE);
+                        entries.add(ModItems.MERLIN_LEGGINGS);
+                        entries.add(ModItems.MERLIN_BOOTS);
+                        entries.add(ModItems.VYSETRIUM_CRYSTAL);
                     }).build());
 
     public static void registerItemGroups() {

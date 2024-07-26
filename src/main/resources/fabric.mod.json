@@ -43,7 +43,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"tutorialmod:cad"
+			"tutorialmod:cad",
+			"tutorialmod:cadstats"
 		]
 	}
 }

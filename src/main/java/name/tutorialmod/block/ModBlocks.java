@@ -22,6 +22,8 @@ public class ModBlocks {
             new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), AbstractBlock.Settings.copy(Blocks.IRON_ORE).sounds(BlockSoundGroup.AMETHYST_CLUSTER)));
     public static final Block JUMP_BLOCK = registerBlock("jump_block",
             new JumpBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).jumpVelocityMultiplier(3f)));
+    public static final Block VYSETRIUM_ORE = registerBlock("vysetrium_ore",
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_GOLD_ORE)));
 
     private static Block registerBlock(String name, Block block){
         registerBlockItem(name, block);

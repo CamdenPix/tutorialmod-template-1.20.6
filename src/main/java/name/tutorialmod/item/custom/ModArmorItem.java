@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
+@Deprecated
 public class ModArmorItem extends ArmorItem {
     public static final ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
@@ -35,7 +36,7 @@ public class ModArmorItem extends ArmorItem {
         super.inventoryTick(stack, world, entity, slot, selected);
     }
 
-    //<editor-fold desc="Helper for checking wearing the full armor">
+    //<editor-fold desc="Helper Functions for checking wearing the full armor">
     private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
         ItemStack boots = player.getInventory().getArmorStack(0);
         ItemStack leggings = player.getInventory().getArmorStack(1);
@@ -81,4 +82,5 @@ public class ModArmorItem extends ArmorItem {
         }
     }
     //</editor-fold>
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }

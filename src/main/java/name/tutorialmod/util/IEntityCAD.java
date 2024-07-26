@@ -8,4 +8,20 @@ public interface IEntityCAD {
     void swapArmor();
 
     void setArmor();
+
+    void clearArmor();
+
+    void increaseStrength(int str);
+
+    void increaseEndurance(int hp);
+
+    void increaseSpeed(int speed);
+
+    void increaseCognition(int cog);
+
+    void increaseDefense(int def);
+
+    void stepStats();
+
+    void clearStats();
 }
