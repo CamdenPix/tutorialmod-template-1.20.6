@@ -6,7 +6,11 @@ import java.util.UUID;
 import name.tutorialmod.components.CADComponent;
 import name.tutorialmod.components.CADStatsComponent;
 import name.tutorialmod.item.ModItems;
+import name.tutorialmod.networking.payload.EquipCADPayload;
+import name.tutorialmod.networking.payload.EvolveCADPayload;
 import name.tutorialmod.util.IEntityCAD;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -45,6 +49,49 @@ public abstract class ModEntityCADMixin extends LivingEntity implements IEntityC
         this.equipStack(EquipmentSlot.LEGS, ARMOR.get(this).swapLeggings(armorList.next()));
         this.equipStack(EquipmentSlot.CHEST, ARMOR.get(this).swapChestplate(armorList.next()));
         this.equipStack(EquipmentSlot.HEAD, ARMOR.get(this).swapHelmet(armorList.next()));
+
+    }
+
+    @Unique
+    public String evolveCAD(int damageDealt, int damageTaken, int distanceSprinted) {
+        String evoText = ("--CAD Stats increases--\n");
+
+        int diffDamageDealt = STATS.get(this).setPrevDamageDealt(damageDealt);
+        int strengthIncrease = Math.min(diffDamageDealt/(20*(STATS.get(this).getStrength()+1)), 4);
+        evoText = evoText + "Strength: " + STATS.get(this).getStrength() + " -> ";
+        increaseStrength(strengthIncrease);
+        evoText = evoText + STATS.get(this).getStrength() + "\n";
+
+
+        int diffDamageTaken = STATS.get(this).setPrevDamageTaken(damageTaken);
+
+        int defenseIncrease = Math.min(diffDamageTaken/(5*(STATS.get(this).getProtection()+1)), 4);
+        evoText = evoText + "Defense: " + STATS.get(this).getProtection() + " -> ";
+        increaseDefense(defenseIncrease);
+        evoText = evoText + STATS.get(this).getProtection() + "\n";
+
+        int enduranceIncrease = Math.min(diffDamageTaken/(5*(STATS.get(this).getHp()+1)), 4);
+        evoText = evoText + "Endurance: " + STATS.get(this).getHp() + " -> ";
+        increaseEndurance(enduranceIncrease);
+        evoText = evoText + STATS.get(this).getHp() + "\n";
+
+        int diffDistanceSprinted = STATS.get(this).setPrevDistanceSprinted(distanceSprinted);
+        float speedIncrease = (float) Math.min( (diffDistanceSprinted/(10000*(STATS.get(this).getSpeed()+1))), 4.0);
+        evoText = evoText + "Speed: " + STATS.get(this).getSpeed() + " -> ";
+        increaseSpeed(speedIncrease);
+        evoText = evoText + STATS.get(this).getSpeed();
+
+
+        //TODO Don't infinitely stack protection
+        Iterable<ItemStack> getArmor = this.getArmorItems();
+        Iterator<ItemStack> armorList = getArmor.iterator();
+        int level = STATS.get(this).getProtection();
+
+        armorList.next().addEnchantment(Enchantments.PROTECTION, level);
+        armorList.next().addEnchantment(Enchantments.PROTECTION, level);
+        armorList.next().addEnchantment(Enchantments.PROTECTION, level);
+        armorList.next().addEnchantment(Enchantments.PROTECTION, level);
+        return evoText;
     }
 
     @Unique
@@ -54,16 +101,12 @@ public abstract class ModEntityCADMixin extends LivingEntity implements IEntityC
         ItemStack leggings = ModItems.SHIDO_LEGGINGS.getDefaultStack();
         ItemStack boots = ModItems.SHIDO_BOOTS.getDefaultStack();
 
-        int level = STATS.get(this).getProtection();
+
         helmet.addEnchantment(Enchantments.BINDING_CURSE, 1);
         chestplate.addEnchantment(Enchantments.BINDING_CURSE, 1);
         leggings.addEnchantment(Enchantments.BINDING_CURSE, 1);
         boots.addEnchantment(Enchantments.BINDING_CURSE, 1);
 
-        helmet.addEnchantment(Enchantments.PROTECTION, level);
-        chestplate.addEnchantment(Enchantments.PROTECTION, level);
-        leggings.addEnchantment(Enchantments.PROTECTION, level);
-        boots.addEnchantment(Enchantments.PROTECTION, level);
 
 
         ARMOR.get(this).setArmor(
@@ -85,8 +128,8 @@ public abstract class ModEntityCADMixin extends LivingEntity implements IEntityC
     }
 
     @Unique
-    public void increaseSpeed(int speed){
-        STATS.get(this).setSpeed(STATS.get(this).getSpeed()+speed);
+    public void increaseSpeed(float speed){
+        STATS.get(this).setSpeed(STATS.get(this).getSpeed()+speed/10);
     }
 
     @Unique

@@ -21,30 +21,30 @@ import java.util.function.Supplier;
 public class ModArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> SHIDO = ModArmorMaterials.register("shido",
             Util.make(new EnumMap(CADArmorItem.Type.class), map -> {
-                map.put(CADArmorItem.Type.BOOTS, 1);
-                map.put(CADArmorItem.Type.LEGGINGS, 1);
-                map.put(CADArmorItem.Type.CHESTPLATE, 1);
-                map.put(CADArmorItem.Type.HELMET, 1);
-                map.put(CADArmorItem.Type.BODY, 1);
-    }), 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.0f, 0.05f, () -> Ingredient.ofItems(ModItems.RUBY));
+                map.put(CADArmorItem.Type.BOOTS, 0);
+                map.put(CADArmorItem.Type.LEGGINGS, 0);
+                map.put(CADArmorItem.Type.CHESTPLATE, 0);
+                map.put(CADArmorItem.Type.HELMET, 0);
+                map.put(CADArmorItem.Type.BODY, 0);
+    }), 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0, 0, () -> Ingredient.ofItems(ModItems.RUBY));
 
     public static final RegistryEntry<ArmorMaterial> HONORIS = ModArmorMaterials.register("honoris",
             Util.make(new EnumMap(CADArmorItem.Type.class), map -> {
-                map.put(CADArmorItem.Type.BOOTS, 3);
-                map.put(CADArmorItem.Type.LEGGINGS, 6);
-                map.put(CADArmorItem.Type.CHESTPLATE, 8);
-                map.put(CADArmorItem.Type.HELMET, 3);
-                map.put(CADArmorItem.Type.BODY, 11);
-            }), 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.0f, 0.05f, () -> Ingredient.ofItems(ModItems.RUBY));
+                map.put(CADArmorItem.Type.BOOTS, 0);
+                map.put(CADArmorItem.Type.LEGGINGS, 0);
+                map.put(CADArmorItem.Type.CHESTPLATE, 0);
+                map.put(CADArmorItem.Type.HELMET, 0);
+                map.put(CADArmorItem.Type.BODY, 0);
+            }), 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0, 0, () -> Ingredient.ofItems(ModItems.RUBY));
 
     public static final RegistryEntry<ArmorMaterial> MERLIN = ModArmorMaterials.register("merlin",
             Util.make(new EnumMap(CADArmorItem.Type.class), map -> {
-                map.put(CADArmorItem.Type.BOOTS, 3);
-                map.put(CADArmorItem.Type.LEGGINGS, 6);
-                map.put(CADArmorItem.Type.CHESTPLATE, 8);
-                map.put(CADArmorItem.Type.HELMET, 3);
-                map.put(CADArmorItem.Type.BODY, 11);
-            }), 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.0f, 0.05f, () -> Ingredient.ofItems(ModItems.RUBY));
+                map.put(CADArmorItem.Type.BOOTS, 0);
+                map.put(CADArmorItem.Type.LEGGINGS, 0);
+                map.put(CADArmorItem.Type.CHESTPLATE, 0);
+                map.put(CADArmorItem.Type.HELMET, 0);
+                map.put(CADArmorItem.Type.BODY, 0);
+            }), 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0, 0, () -> Ingredient.ofItems(ModItems.RUBY));
 
 
 

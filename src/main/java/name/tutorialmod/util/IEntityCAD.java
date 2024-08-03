@@ -24,4 +24,6 @@ public interface IEntityCAD {
     void stepStats();
 
     void clearStats();
+
+    String evolveCAD(int damageDealt, int damageTaken, int distanceSprinted);
 }

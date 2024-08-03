@@ -28,7 +28,6 @@ public class TutorialModClientEntrypoint implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (testKey.isPressed()) {
                 if (!wasTestKeyPressed) {
-                    //TODO: Set up player to store armor data
                     MinecraftClient mc = MinecraftClient.getInstance();
                     ClientPlayNetworking.send(
                             new EquipCADPayload(mc.player.getUuid())

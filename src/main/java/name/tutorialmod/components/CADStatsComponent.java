@@ -11,13 +11,20 @@ import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 public class CADStatsComponent implements Component, AutoSyncedComponent {
     public static final ComponentKey<CADStatsComponent> KEY =
             ComponentRegistry.getOrCreate(new Identifier("tutorialmod", "cadstats"), CADStatsComponent.class);
-
+    //Actual Stats
     int strength;
     int endurance;
     float speed;
     float cognition;
     int defense;
     long abilitiesBitFlags;
+
+    //For evos
+    int prevDamageDealt;
+    int prevDamageTaken;
+    int prevDistanceSprinted;
+
+
 
     public CADStatsComponent () {
         strength = 0;
@@ -74,6 +81,25 @@ public class CADStatsComponent implements Component, AutoSyncedComponent {
 
     public void setDefense(int defense){
         this.defense = defense;
+    }
+
+
+    public int setPrevDamageDealt(int damageDealt){
+        int temp = damageDealt - prevDamageDealt;
+        prevDamageDealt = damageDealt;
+        return temp;
+    }
+
+    public int setPrevDamageTaken(int damageTaken) {
+        int temp = damageTaken - prevDamageTaken;
+        prevDamageTaken = damageTaken;
+        return temp;
+    }
+
+    public int setPrevDistanceSprinted(int distanceSprinted) {
+        int temp = distanceSprinted - prevDistanceSprinted;
+        prevDistanceSprinted = distanceSprinted;
+        return temp;
     }
 
     @Override

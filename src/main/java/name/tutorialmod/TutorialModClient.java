@@ -28,6 +28,7 @@ public class TutorialModClient implements ClientModInitializer{
         CLIENT_ENTRYPOINT.onInitializeClient();
         ModMessages.registerS2CPackets();
 
+        //these commands all crash running on a server
         CommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess, environment) -> dispatcher.register(literal("setcad")
                 .executes(context -> {
                     ServerPlayerEntity player = context.getSource().getPlayer();

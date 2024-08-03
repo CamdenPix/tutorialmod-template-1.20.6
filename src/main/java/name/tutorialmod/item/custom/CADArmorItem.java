@@ -44,19 +44,19 @@ public class CADArmorItem extends ArmorItem {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if(!world.isClient && entity instanceof PlayerEntity){
             CADStatsComponent cad = STATS.get(entity);
-            updateValues(cad.getArmor(), cad.getToughness(), cad.getHp(), cad.getSpeed());
+            updateValues(cad.getArmor(), cad.getToughness(), cad.getHp(), cad.getSpeed(), cad.getStrength());
         }
     }
 
-    public void updateValues(int armor, float toughness, int hp, float speed){
+    public void updateValues(int armor, float toughness, int hp, float speed, int attack){
         AttributeModifiersComponent.Builder builder = AttributeModifiersComponent.builder();
         AttributeModifierSlot attributeModifierSlot = AttributeModifierSlot.forEquipmentSlot(type.getEquipmentSlot());
         UUID uUID = (UUID) MODIFIERS.get(type);
         //TODO extend this builder structure to have all EntityAttributes types for more maliabilty?
-        //Maybe make it so only the chest plate has this, so that
         builder.add(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier(uUID, "Armor modifier", armor, EntityAttributeModifier.Operation.ADD_VALUE), attributeModifierSlot);
         builder.add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(uUID, "Armor toughness", toughness, EntityAttributeModifier.Operation.ADD_VALUE), attributeModifierSlot);
         builder.add(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier(uUID, "Health", hp, EntityAttributeModifier.Operation.ADD_VALUE), attributeModifierSlot);
+        builder.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(uUID, "Attack", attack, EntityAttributeModifier.Operation.ADD_VALUE), attributeModifierSlot);
         builder.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(uUID, "Speed", speed, EntityAttributeModifier.Operation.ADD_VALUE), attributeModifierSlot);
 
         armorAttributes = builder.build();
@@ -65,7 +65,7 @@ public class CADArmorItem extends ArmorItem {
 
     @Override
     public AttributeModifiersComponent getAttributeModifiers() {
-        if(armorAttributes == null) {
+        if(armorAttributes == null || type != Type.CHESTPLATE) {
             return super.getAttributeModifiers();
         } else{
             return armorAttributes;
